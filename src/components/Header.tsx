@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, Phone, Mail, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import logo from "@/assets/logo.png";
 
 const Header = () => {
@@ -108,53 +109,69 @@ const Header = () => {
             </div>
 
             {/* Mobile Menu Button */}
-            <button
-              className="lg:hidden p-2"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
+            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+              <SheetTrigger asChild className="lg:hidden">
+                <button className="p-2">
+                  <Menu className="h-6 w-6" />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[85%] sm:w-[400px] p-0">
+                <div className="flex flex-col h-full">
+                  {/* Logo Section */}
+                  <div className="p-6 border-b">
+                    <Link to="/" className="flex items-center gap-3" onClick={() => setIsMobileMenuOpen(false)}>
+                      <img src={logo} alt="Janapriya Logo" className="h-12 w-12" />
+                      <div>
+                        <div className="font-bold text-base text-primary leading-tight">Janapriya</div>
+                        <div className="text-xs text-muted-foreground">Group of Institutions</div>
+                      </div>
+                    </Link>
+                  </div>
+
+                  {/* Navigation */}
+                  <nav className="flex-1 overflow-y-auto py-4 px-4 space-y-1">
+                    {navigation.map((item) => (
+                      <div key={item.name}>
+                        <Link
+                          to={item.href}
+                          className="flex items-center justify-between px-4 py-3 text-base font-medium hover:bg-accent rounded-md transition-colors"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          <span>{item.name}</span>
+                          {item.submenu && <ChevronDown className="h-4 w-4" />}
+                        </Link>
+                        {item.submenu && (
+                          <div className="ml-4 mt-1 space-y-1">
+                            {item.submenu.map((subitem) => (
+                              <Link
+                                key={subitem.name}
+                                to={subitem.href}
+                                className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                              >
+                                {subitem.name}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </nav>
+
+                  {/* Apply Now Button */}
+                  <div className="p-4 border-t">
+                    <Button asChild className="w-full bg-primary hover:bg-primary-dark">
+                      <Link to="/apply" onClick={() => setIsMobileMenuOpen(false)}>
+                        Apply Now
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="lg:hidden border-b bg-background">
-          <nav className="container-wide py-4 space-y-2">
-            {navigation.map((item) => (
-              <div key={item.name}>
-                <Link
-                  to={item.href}
-                  className="block px-4 py-2 text-sm font-medium hover:bg-accent rounded-md transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-                {item.submenu && (
-                  <div className="ml-4 space-y-1">
-                    {item.submenu.map((subitem) => (
-                      <Link
-                        key={subitem.name}
-                        to={subitem.href}
-                        className="block px-4 py-2 text-xs text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        {subitem.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-            <Button asChild className="w-full bg-primary hover:bg-primary-dark mt-4">
-              <Link to="/apply" onClick={() => setIsMobileMenuOpen(false)}>
-                Apply Now
-              </Link>
-            </Button>
-          </nav>
-        </div>
-      )}
     </header>
   );
 };

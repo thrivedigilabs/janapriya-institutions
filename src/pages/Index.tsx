@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ChevronLeft, ChevronRight, Award, Users, BookOpen, GraduationCap, Building2, FlaskConical, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Award, Users, BookOpen, GraduationCap, Building2, FlaskConical, ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Header from "@/components/Header";
@@ -13,9 +13,16 @@ import chairmanImg from "@/assets/chairman.jpg";
 import principalImg from "@/assets/principal.jpg";
 import nursingFaculty from "@/assets/nursing-faculty.jpg";
 import libraryImg from "@/assets/library.jpg";
+import statsCourses from "@/assets/stats-courses.jpg";
+import statsFaculties from "@/assets/stats-faculties.jpg";
+import statsLectures from "@/assets/stats-lectures.jpg";
+import statsResearch from "@/assets/stats-research.jpg";
+import statsBooks from "@/assets/stats-books.jpg";
+import statsAlumni from "@/assets/stats-alumni.jpg";
 
 const Index = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentFacultySlide, setCurrentFacultySlide] = useState(0);
 
   const slides = [
     {
@@ -45,6 +52,13 @@ const Index = () => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentFacultySlide((prev) => (prev + 1) % faculties.length);
+    }, 4000);
     return () => clearInterval(timer);
   }, []);
 
@@ -167,6 +181,31 @@ const Index = () => {
           </div>
         </section>
 
+        {/* Video Section */}
+        <section className="section-padding bg-background">
+          <div className="container-wide">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4 text-primary">Experience Janapriya</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Take a virtual tour of our campus and discover what makes Janapriya the premier choice for health sciences education.
+              </p>
+            </div>
+            
+            <div className="relative aspect-video max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-2xl">
+              <img 
+                src={heroCampus} 
+                alt="Campus Tour" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center group hover:bg-black/50 transition-colors cursor-pointer">
+                <div className="w-20 h-20 rounded-full bg-secondary flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                  <Play className="h-10 w-10 text-secondary-foreground ml-1" fill="currentColor" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Approvals Section */}
         <section className="bg-accent/30 py-8">
           <div className="container-wide">
@@ -181,17 +220,137 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Stats Section */}
-        <section className="section-padding bg-gradient-to-br from-primary to-primary-dark text-primary-foreground">
+        {/* Stats Grid with Images */}
+        <section className="section-padding bg-background">
           <div className="container-wide">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {stats.map((stat) => (
-                <div key={stat.label} className="text-center">
-                  <stat.icon className="h-12 w-12 mx-auto mb-4 opacity-90" />
-                  <div className="text-4xl md:text-5xl font-bold mb-2">{stat.value}</div>
-                  <div className="text-sm md:text-base opacity-90">{stat.label}</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Courses */}
+              <div className="relative h-80 rounded-2xl overflow-hidden group cursor-pointer">
+                <img src={statsCourses} alt="Courses Offered" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-transparent flex flex-col justify-end p-6 text-white">
+                  <div className="text-5xl font-bold mb-2">180 +</div>
+                  <div className="text-xl font-medium">Courses Offered</div>
                 </div>
-              ))}
+              </div>
+
+              {/* Faculties */}
+              <div className="relative h-80 rounded-2xl overflow-hidden group cursor-pointer">
+                <img src={statsFaculties} alt="Faculties" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/90 via-primary-dark/60 to-transparent flex flex-col justify-end p-6 text-white">
+                  <div className="text-5xl font-bold mb-2">650 +</div>
+                  <div className="text-xl font-medium">Faculties</div>
+                </div>
+              </div>
+
+              {/* e-Lectures */}
+              <div className="relative h-80 rounded-2xl overflow-hidden group cursor-pointer">
+                <img src={statsLectures} alt="e-Lectures" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/60 to-transparent flex flex-col justify-end p-6 text-white">
+                  <div className="text-5xl font-bold mb-2">9000 +</div>
+                  <div className="text-xl font-medium">e-Lectures</div>
+                </div>
+              </div>
+
+              {/* Books Access */}
+              <div className="relative h-80 rounded-2xl overflow-hidden group cursor-pointer sm:col-span-2 lg:col-span-1">
+                <img src={statsBooks} alt="Books Access" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-transparent flex flex-col justify-end p-6 text-white">
+                  <div className="text-5xl font-bold mb-2">35000 +</div>
+                  <div className="text-xl font-medium">Books - Access all Libraries</div>
+                </div>
+              </div>
+
+              {/* Research Publications */}
+              <div className="relative h-80 rounded-2xl overflow-hidden group cursor-pointer">
+                <img src={statsResearch} alt="Research Publications" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/90 via-primary-dark/60 to-transparent flex flex-col justify-end p-6 text-white">
+                  <div className="text-5xl font-bold mb-2">1700 +</div>
+                  <div className="text-xl font-medium">Research Publications</div>
+                </div>
+              </div>
+
+              {/* Alumni Network */}
+              <div className="relative h-80 rounded-2xl overflow-hidden group cursor-pointer">
+                <img src={statsAlumni} alt="Alumni Network" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/60 to-transparent flex flex-col justify-end p-6 text-white">
+                  <div className="text-5xl font-bold mb-2">50000 +</div>
+                  <div className="text-xl font-medium">Alumni Network</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Our Schools Carousel */}
+        <section className="section-padding bg-gradient-to-br from-primary/10 to-primary-dark/10">
+          <div className="container-wide">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4 text-primary">OUR SCHOOLS</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Explore our specialized faculties offering comprehensive health sciences education.
+              </p>
+            </div>
+
+            <div className="relative max-w-4xl mx-auto">
+              <div className="relative h-[500px] overflow-hidden rounded-2xl">
+                {faculties.map((faculty, index) => (
+                  <div
+                    key={faculty.name}
+                    className={`absolute inset-0 transition-all duration-700 ${
+                      index === currentFacultySlide 
+                        ? "opacity-100 translate-x-0 scale-100" 
+                        : index < currentFacultySlide
+                        ? "opacity-0 -translate-x-full scale-95"
+                        : "opacity-0 translate-x-full scale-95"
+                    }`}
+                  >
+                    <div className="relative h-full rounded-2xl overflow-hidden shadow-2xl">
+                      <img 
+                        src={faculty.image} 
+                        alt={faculty.name} 
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/60 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                        <h3 className="text-3xl font-bold mb-3">{faculty.name}</h3>
+                        <p className="text-lg mb-4 opacity-90">{faculty.description}</p>
+                        <Button asChild variant="secondary" size="lg">
+                          <Link to={faculty.link}>
+                            Explore Programs <ArrowRight className="ml-2 h-5 w-5" />
+                          </Link>
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Carousel Controls */}
+              <button
+                onClick={() => setCurrentFacultySlide((prev) => (prev - 1 + faculties.length) % faculties.length)}
+                className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-secondary hover:bg-secondary-light rounded-full shadow-lg transition-colors z-10"
+              >
+                <ChevronLeft className="h-6 w-6 text-secondary-foreground" />
+              </button>
+              <button
+                onClick={() => setCurrentFacultySlide((prev) => (prev + 1) % faculties.length)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-secondary hover:bg-secondary-light rounded-full shadow-lg transition-colors z-10"
+              >
+                <ChevronRight className="h-6 w-6 text-secondary-foreground" />
+              </button>
+
+              {/* Carousel Indicators */}
+              <div className="flex justify-center gap-2 mt-6">
+                {faculties.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentFacultySlide(index)}
+                    className={`h-2 rounded-full transition-all ${
+                      index === currentFacultySlide ? "bg-primary w-8" : "bg-primary/30 w-2"
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </section>

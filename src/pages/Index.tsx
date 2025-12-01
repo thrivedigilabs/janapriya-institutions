@@ -206,14 +206,22 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Approvals Section */}
-        <section className="bg-accent/30 py-8">
-          <div className="container-wide">
-            <div className="flex flex-wrap justify-center items-center gap-8">
-              {approvals.map((approval) => (
-                <div key={approval.name} className="text-center">
+        {/* Approvals Section - Auto Scrolling */}
+        <section className="bg-accent/30 py-8 overflow-hidden">
+          <div className="relative">
+            <div className="flex animate-scroll">
+              {/* First set */}
+              {approvals.map((approval, idx) => (
+                <div key={`first-${idx}`} className="flex-shrink-0 px-8 text-center min-w-[250px]">
                   <div className="font-bold text-2xl text-primary mb-1">{approval.name}</div>
-                  <div className="text-xs text-muted-foreground max-w-[150px]">{approval.fullName}</div>
+                  <div className="text-sm text-muted-foreground">{approval.fullName}</div>
+                </div>
+              ))}
+              {/* Duplicate set for seamless loop */}
+              {approvals.map((approval, idx) => (
+                <div key={`second-${idx}`} className="flex-shrink-0 px-8 text-center min-w-[250px]">
+                  <div className="font-bold text-2xl text-primary mb-1">{approval.name}</div>
+                  <div className="text-sm text-muted-foreground">{approval.fullName}</div>
                 </div>
               ))}
             </div>

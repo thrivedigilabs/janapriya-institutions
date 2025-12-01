@@ -27,7 +27,7 @@ const About = () => {
         <section className="section-padding">
           <div className="container-wide">
             <Tabs defaultValue="overview" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 mb-12">
+              <TabsList className="mb-12">
                 <TabsTrigger value="overview">Overview</TabsTrigger>
                 <TabsTrigger value="vision">Vision & Mission</TabsTrigger>
                 <TabsTrigger value="governance">Governance</TabsTrigger>

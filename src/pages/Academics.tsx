@@ -78,7 +78,7 @@ const Academics = () => {
         <section className="section-padding">
           <div className="container-wide">
             <Tabs defaultValue="faculties" className="w-full">
-              <TabsList className="grid w-full grid-cols-3 mb-12">
+              <TabsList className="mb-12">
                 <TabsTrigger value="faculties">Faculties</TabsTrigger>
                 <TabsTrigger value="programs">Programs</TabsTrigger>
                 <TabsTrigger value="calendar">Academic Calendar</TabsTrigger>

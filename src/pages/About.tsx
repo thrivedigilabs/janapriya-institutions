@@ -27,12 +27,12 @@ const About = () => {
         <section className="section-padding">
           <div className="container-wide">
             <Tabs defaultValue="overview" className="w-full">
-              <TabsList className="mb-12">
-                <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="vision">Vision & Mission</TabsTrigger>
-                <TabsTrigger value="governance">Governance</TabsTrigger>
-                <TabsTrigger value="leadership">Leadership</TabsTrigger>
-                <TabsTrigger value="approvals">Approvals</TabsTrigger>
+              <TabsList className="mb-12 w-full grid grid-cols-2 md:grid-cols-5 h-auto">
+                <TabsTrigger value="overview" className="py-3">Overview</TabsTrigger>
+                <TabsTrigger value="vision" className="py-3">Vision & Mission</TabsTrigger>
+                <TabsTrigger value="governance" className="py-3">Governance</TabsTrigger>
+                <TabsTrigger value="leadership" className="py-3">Leadership</TabsTrigger>
+                <TabsTrigger value="approvals" className="py-3">Approvals</TabsTrigger>
               </TabsList>
 
               <TabsContent value="overview">

@@ -78,10 +78,10 @@ const Academics = () => {
         <section className="section-padding">
           <div className="container-wide">
             <Tabs defaultValue="faculties" className="w-full">
-              <TabsList className="mb-12">
-                <TabsTrigger value="faculties">Faculties</TabsTrigger>
-                <TabsTrigger value="programs">Programs</TabsTrigger>
-                <TabsTrigger value="calendar">Academic Calendar</TabsTrigger>
+              <TabsList className="mb-12 w-full grid grid-cols-3 h-auto">
+                <TabsTrigger value="faculties" className="py-3">Faculties</TabsTrigger>
+                <TabsTrigger value="programs" className="py-3">Programs</TabsTrigger>
+                <TabsTrigger value="calendar" className="py-3">Academic Calendar</TabsTrigger>
               </TabsList>
 
               <TabsContent value="faculties">
